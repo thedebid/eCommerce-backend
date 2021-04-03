@@ -31,7 +31,6 @@ export default class Login extends Component {
     if (type === "checked") {
       value = checked;
     }
-
     this.setState({
       [name]: value,
     });
