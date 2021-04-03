@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchUsersActions } from "./../../actions/user.action";
+import { connect } from "react-redux";
 
-const ListView = () => {
+const ViewUsers = (props) => {
+  const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // fetch: () => dispatch(fetchUsersActions());
+    console.log(props);
+    return () => {};
+  });
   return (
     <>
       <div className="container-fluid">
@@ -115,4 +125,16 @@ const ListView = () => {
     </>
   );
 };
-export default ListView;
+
+const mapStateToProps = (centralStore) => ({
+  // console.log(centralStore),
+  setProduct: centralStore.product.products,
+  // products: centralStore.product.products,
+});
+
+// what component will trigger
+const mapDispatchToProps = (dispatch) => ({
+  fetch: () => dispatch(fetchUsersActions({ pageCount: 10 })),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewUsers);
