@@ -128,7 +128,7 @@ const ViewUsers = (props) => {
 
 const mapStateToProps = (centralStore) => ({
   // console.log(centralStore),
-  setProduct: centralStore.product.products,
+ // setProduct: centralStore.product.products,
   // products: centralStore.product.products,
 });
 
