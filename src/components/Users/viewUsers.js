@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchUsersActions } from "./../../actions/user.action";
+import { fetchUsersActions } from "../../actions/user.action";
 import { connect } from "react-redux";
 
 const ViewUsers = (props) => {
@@ -34,9 +34,13 @@ const ViewUsers = (props) => {
               </nav>
             </div>
             <div className="col-md-6 col-sm-12 text-right hidden-xs">
-              <a href="/" className="btn btn-sm btn-primary btn-round" title="">
+              <Link
+                to="/add-user"
+                className="btn btn-sm btn-primary btn-round"
+                title=""
+              >
                 Add New
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -128,7 +132,7 @@ const ViewUsers = (props) => {
 
 const mapStateToProps = (centralStore) => ({
   // console.log(centralStore),
- // setProduct: centralStore.product.products,
+  // setProduct: centralStore.product.products,
   // products: centralStore.product.products,
 });
 

@@ -44,18 +44,17 @@ export default class Login extends Component {
     //Check login
     //httpClient is a function which is defined utils sections with the help of axios
     httpClient
-      .POST("/auth/login",this.state)
+      .POST("/auth/login", this.state)
       .then((response) => {
         //console.log(response.data.message)
         notify.showSuccess(response.data.message);
         localStorage.setItem("token", response.data.result.token);
         localStorage.setItem("user", JSON.stringify(response.data.result.user));
         localStorage.setItem("isLoggedIn", true);
-        this.props.history.push('/');
-        
+        this.props.history.push("/");
       })
       .catch((err) => {
-       notify.handleError(err);
+        notify.handleError(err);
       })
       .finally(() => {
         //
@@ -63,7 +62,6 @@ export default class Login extends Component {
     // this.setState({
     //     isSubmitting:true
     // })
-
   }
   render() {
     return (
@@ -97,7 +95,6 @@ export default class Login extends Component {
                       id="email"
                       name="email"
                       placeholder="user@domain.com"
-                      
                       onChange={this.handleChange}
                     />
                     <label></label>
@@ -134,7 +131,6 @@ export default class Login extends Component {
                   >
                     LOGIN
                   </button>
-
                 </form>
               </div>
             </div>

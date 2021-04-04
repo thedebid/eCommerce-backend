@@ -10,13 +10,18 @@ const metisMenu = [
     to: "/",
   },
   {
-    id: 12,
+    id: 2,
     icon: "icon-user",
     label: "Users",
     to: "/",
     content: [
       {
-        id: 2,
+        id: 3,
+        label: "Add User",
+        to: "/add-user",
+      },
+      {
+        id: 4,
         label: "All Users",
         to: "/view-users",
       },
