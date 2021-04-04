@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Menu from "./Menu";
 import Header from "./Header";
-// import ThemeSetting from "./ThemeSetting";
+import ThemeSetting from "./ThemeSetting";
 // import Searchbar from "./Searchbar";
 // import Rightbar from "./Rightbar";
 // import Megamenu from "./Megamenu";
@@ -12,7 +12,7 @@ export default class Layout extends Component {
   render() {
     return (
       <>
-        {/* <ThemeSetting /> */}
+        <ThemeSetting />
         <div className="overlay" />
         <div id="wrapper">
           <Header />
