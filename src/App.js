@@ -9,6 +9,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
@@ -26,7 +28,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     ></Route>
   );
 };
-
 class App extends Component {
   render() {
     const {
@@ -52,6 +53,7 @@ class App extends Component {
           this.leftSidebar = leftSidebar;
         }}
       >
+        <ToastContainer />
         <Router>
           <Switch>
             {/* <Route path="/signup" component={SignUp} /> */}
