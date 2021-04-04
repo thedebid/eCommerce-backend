@@ -87,9 +87,9 @@ const Routes = [
   },
   {
     path: "/",
-    name: "MediaObject",
+    name: "Dashboard",
     exact: true,
-    pageTitle: "MediaObject",
+    pageTitle: "Dashboard",
     component: Dashboard,
   },
   //   {

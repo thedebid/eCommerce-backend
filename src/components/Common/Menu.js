@@ -100,7 +100,7 @@ class Menu extends Component {
                 alt="Oculux Logo"
                 className="img-fluid logo"
               />
-              <span>Oculux</span>
+              <span>eMall</span>
             </Link>
             <button
               type="button"

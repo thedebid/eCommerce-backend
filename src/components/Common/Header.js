@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import {
-//   toggleMegamenu,
-//   toggleSearchBar,
-//   toggleNotificationBar,
-//   setOffcanvas,
-// } from "../../actions/settingsAction";
-
-const Header = ({
-  toggleMegamenu,
-  isMegaMenu,
-  toggleNotificationBar,
-  toggleSearchBar,
+import {
+  // toggleMegamenu,
+  // toggleSearchBar,
+  // toggleNotificationBar,
   setOffcanvas,
-  offcanvas,
-}) => {
+} from "../../actions/settingsAction";
+const logout = () => {
+  localStorage.clear();
+};
+const Header = ({ setOffcanvas, offcanvas }) => {
   const [scrolled, setScrolled] = useState(0);
   const scrollProgress = () => {
     const scrollPx = document.documentElement.scrollTop;
@@ -43,7 +38,7 @@ const Header = ({
     // background: "#e91e63",
     width: scrolled,
   };
-  console.log(scrolled, "nbnvhffhfgh");
+  // console.log(scrolled, "nbnvhffhfgh");
   return (
     <>
       <nav className="navbar top-navbar">
@@ -234,85 +229,6 @@ const Header = ({
                   </li>
                 </ul>
               </li>
-              <li className="dropdown language-menu">
-                <span
-                  className="dropdown-toggle icon-menu"
-                  data-toggle="dropdown"
-                >
-                  <i className="fa fa-language"></i>
-                </span>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <span className="dropdown-item pt-2 pb-2">
-                    <img
-                      src="../assets/images/flag/us.svg "
-                      className="w20 mr-2 rounded-circle"
-                      alt="avatar"
-                    />{" "}
-                    US English
-                  </span>
-                  <span className="dropdown-item pt-2 pb-2">
-                    <img
-                      src="../assets/images/flag/gb.svg "
-                      className="w20 mr-2 rounded-circle"
-                      alt="avatar"
-                    />{" "}
-                    UK English
-                  </span>
-                  <div className="dropdown-divider"></div>
-                  <span className="dropdown-item pt-2 pb-2">
-                    <img
-                      src="../assets/images/flag/russia.svg "
-                      className="w20 mr-2 rounded-circle"
-                      alt="avatar"
-                    />{" "}
-                    Russian
-                  </span>
-                  <span className="dropdown-item pt-2 pb-2">
-                    <img
-                      src="../assets/images/flag/arabia.svg "
-                      className="w20 mr-2 rounded-circle"
-                      alt="avatar"
-                    />{" "}
-                    Arabic
-                  </span>
-                  <span className="dropdown-item pt-2 pb-2">
-                    <img
-                      src="../assets/images/flag/france.svg "
-                      className="w20 mr-2 rounded-circle"
-                      alt="avatar"
-                    />{" "}
-                    French
-                  </span>
-                </div>
-              </li>
-              <li style={{ cursor: "pointer" }}>
-                <span
-                  onClick={() => toggleMegamenu(!isMegaMenu)}
-                  className={`megamenu_toggle icon-menu`}
-                  title="Mega Menu"
-                >
-                  Mega
-                </span>
-              </li>
-              <li className="p_social">
-                <Link
-                  to="/page-social"
-                  className="social icon-menu"
-                  title="News"
-                >
-                  Social
-                </Link>
-              </li>
-              <li className="p_news">
-                <Link to="/page-news" className="news icon-menu" title="News">
-                  News
-                </Link>
-              </li>
-              <li className="p_blog">
-                <Link to="/page-blog" className="blog icon-menu" title="Blog">
-                  Blog
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -320,26 +236,7 @@ const Header = ({
             <div id="navbar-menu">
               <ul className="nav navbar-nav">
                 <li>
-                  <span
-                    onClick={() => toggleSearchBar(true)}
-                    className="search_toggle icon-menu"
-                    title="Search Result"
-                  >
-                    <i className="icon-magnifier"></i>
-                  </span>
-                </li>
-                <li>
-                  <span
-                    onClick={() => toggleNotificationBar(true)}
-                    className="right_toggle icon-menu"
-                    title="Right Menu"
-                  >
-                    <i className="icon-bubbles"></i>
-                    <span className="notification-dot bg-pink">2</span>
-                  </span>
-                </li>
-                <li>
-                  <Link to="/login" className="icon-menu">
+                  <Link className="icon-menu" onClick={logout}>
                     <i className="icon-power"></i>
                   </Link>
                 </li>
@@ -360,14 +257,14 @@ const Header = ({
 };
 
 const mapStateToProps = (state) => ({
-  isMegaMenu: state.settings.isMegaMenu,
+ // isMegaMenu: state.settings.isMegaMenu,
   offcanvas: state.settings.offcanvas,
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   toggleMegamenu: (e) => dispatch(toggleMegamenu(e)),
-//   toggleSearchBar: (e) => dispatch(toggleSearchBar(e)),
-//   toggleNotificationBar: (e) => dispatch(toggleNotificationBar(e)),
-//   setOffcanvas: (e) => dispatch(setOffcanvas(e)),
-// });
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+ // toggleMegamenu: (e) => dispatch(toggleMegamenu(e)),
+ // toggleSearchBar: (e) => dispatch(toggleSearchBar(e)),
+ // toggleNotificationBar: (e) => dispatch(toggleNotificationBar(e)),
+  setOffcanvas: (e) => dispatch(setOffcanvas(e)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

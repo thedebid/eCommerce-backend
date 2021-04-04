@@ -6,7 +6,6 @@ import notify from "./../../Utils/notify";
 export default class Login extends Component {
   constructor() {
     super();
-
     this.state = {
       email: "",
       password: "",
