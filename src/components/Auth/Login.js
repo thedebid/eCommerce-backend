@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import httpClient from "./../../Utils/HttpClient";
+import notify from "./../../Utils/notify";
+
 export default class Login extends Component {
   constructor() {
     super();
@@ -45,12 +47,13 @@ export default class Login extends Component {
     httpClient
       .POST("/auth/login",this.state)
       .then((response) => {
-        console.log(response.data.message)
-        // notify.showSuccess(response.data.message));
+        //console.log(response.data.message)
+        notify.showSuccess(response.data.message);
         localStorage.setItem("token", response.data.result.token);
         localStorage.setItem("user", JSON.stringify(response.data.result.user));
         localStorage.setItem("isLoggedIn", true);
         this.props.history.push('/');
+        
       })
       .catch((err) => {
         // notify.handleError(err);
@@ -98,6 +101,7 @@ export default class Login extends Component {
                       
                       onChange={this.handleChange}
                     />
+                    <label></label>
                   </div>
                   <div className="form-group">
                     <label

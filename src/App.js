@@ -4,11 +4,14 @@ import "./App.css";
 import Login from "./components/Auth/Login";
 import Main from "./components/Common/Main";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <ToastContainer/>
         <Router>
           <Switch>
             {/* <Route path="/signup" component={SignUp} /> */}
