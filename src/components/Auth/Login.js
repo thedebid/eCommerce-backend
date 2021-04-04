@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import httpClient from "./../../Utils/HttpClient";
-import notify from "./../../Utils/notify";
+import httpClient from "../../utils/httpClient";
+import notify from "../../utils/notify";
 
 export default class Login extends Component {
   constructor() {
@@ -55,7 +55,7 @@ export default class Login extends Component {
         
       })
       .catch((err) => {
-        // notify.handleError(err);
+       notify.handleError(err);
       })
       .finally(() => {
         //
@@ -134,7 +134,7 @@ export default class Login extends Component {
                   >
                     LOGIN
                   </button>
-                  
+
                 </form>
               </div>
             </div>

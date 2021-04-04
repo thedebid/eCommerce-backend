@@ -1,4 +1,5 @@
-import {toast} from 'react-toastify';
+import {toast} from 'material-react-toastify';
+import "material-react-toastify/dist/ReactToastify.css";
 
 function showSuccess(msg){
     toast.success(msg);
@@ -13,14 +14,12 @@ function showWarning(msg){
 }
 
 function handleError(error){
-    //debugger;
-    // error
-    // 1. check error
-    // 2. parse error
-    // 3. extract error message
-    // 4. prepare error message
-    // 5. show them UI using toast 
-
+    let errMsg = "Something went wrong";
+    const err = error.response;
+    if (err && err.data) {
+      errMsg = err.data.message;
+    }
+    toast.error(errMsg);
 
 }
 

@@ -14,7 +14,7 @@
 // import Dashboard9 from './Dashboard/dashboard9';
 // import Dashboard10 from './Dashboard/dashboard10';
 // import Dashboard11 from './Dashboard/dashboard11';
-import Dashboard from "./Dashboard/Dash";
+import Dashboard from "./Dashboard/dash";
 // import FormAdvanced from './Form/formAdvanced';
 // import FormBasic from './Form/formsBasic';
 // import FormCropping from './Form/formsCropping';
@@ -76,7 +76,7 @@ import Dashboard from "./Dashboard/Dash";
 // import ListGroup from './Components/ListGroup';
 // import MediaObject from './Components/MediaObject';
 // import Nestable from './Components/Nestable';
-import ViewUers from "./Users/ViewUsers";
+import ViewUers from "./Users/viewUsers";
 const Routes = [
   {
     path: "/view-users",

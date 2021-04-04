@@ -1,4 +1,4 @@
-import httpClient from "./../Utils/HttpClient";
+import httpClient from "../utils/httpClient";
 
 export const UserActionTypes = {
   SET_IS_LOADING: "SET_IS_LOADING",

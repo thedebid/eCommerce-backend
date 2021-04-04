@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import Login from "./components/Auth/Login";
+import Login from "./components/Auth/login";
 import Main from "./components/Common/Main";
 import {
   BrowserRouter as Router,
@@ -9,8 +9,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'material-react-toastify';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
