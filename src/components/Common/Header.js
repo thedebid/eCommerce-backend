@@ -236,7 +236,7 @@ const Header = ({ setOffcanvas, offcanvas }) => {
             <div id="navbar-menu">
               <ul className="nav navbar-nav">
                 <li>
-                  <Link className="icon-menu" onClick={logout}>
+                  <Link className="icon-menu" to="" onClick={logout}>
                     <i className="icon-power"></i>
                   </Link>
                 </li>
@@ -257,14 +257,14 @@ const Header = ({ setOffcanvas, offcanvas }) => {
 };
 
 const mapStateToProps = (state) => ({
- // isMegaMenu: state.settings.isMegaMenu,
+  // isMegaMenu: state.settings.isMegaMenu,
   offcanvas: state.settings.offcanvas,
 });
 
 const mapDispatchToProps = (dispatch) => ({
- // toggleMegamenu: (e) => dispatch(toggleMegamenu(e)),
- // toggleSearchBar: (e) => dispatch(toggleSearchBar(e)),
- // toggleNotificationBar: (e) => dispatch(toggleNotificationBar(e)),
+  // toggleMegamenu: (e) => dispatch(toggleMegamenu(e)),
+  // toggleSearchBar: (e) => dispatch(toggleSearchBar(e)),
+  // toggleNotificationBar: (e) => dispatch(toggleNotificationBar(e)),
   setOffcanvas: (e) => dispatch(setOffcanvas(e)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

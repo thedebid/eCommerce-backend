@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import httpClient from "../../utils/httpClient";
 import notify from "../../utils/notify";
-import { Button } from "../Common/Button/button.component";
+import { Button } from "../Common/Button/Button";
 
 const defaultForm = {
   email: "",
