@@ -1,19 +1,28 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import httpClient from "../../utils/httpClient";
 import notify from "../../utils/notify";
+import { Button } from "../Common/Button/button.component";
+
+const defaultForm = {
+  email: "",
+  password: "",
+  usernameErr: "",
+  passwordErr: "",
+  remember_me: false,
+};
 
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
-      usernameErr: "",
-      passwordErr: "",
-      remember_me: false,
+      data: {
+        ...defaultForm,
+      },
+      error: {
+        ...defaultForm,
+      },
       isSubmitting: false,
-      isValidForm: true,
+      isValidForm: false,
     };
   }
 
@@ -32,40 +41,94 @@ export default class Login extends Component {
     if (type === "checked") {
       value = checked;
     }
-    this.setState({
-      [name]: value,
-    });
+   
+      this.setState(preState => ({
+        data: {
+            ...preState.data,
+            [name]:value
+        }
+    }),()=>{
+      this.validateForm(name);
+
+    })
   };
+
+  // for login form validation
+  validateForm(fieldName) {
+    let errMsg;
+    switch (fieldName) {
+      case "email":
+        errMsg = this.state.data[fieldName]
+          ? this.state.data[fieldName].includes("@") &&
+            this.state.data[fieldName].includes(".com")
+            ? ""
+            : "Invalid email*"
+          : "required field";
+        break;
+      case "password":
+        errMsg = this.state.data[fieldName]
+          ? this.state.data[fieldName].length < 5
+            ? "weak password"
+            : ""
+          : "required field*";
+        break;
+
+      default:
+        break;
+    }
+    this.setState(
+      (preState) => ({
+        error: {
+          ...preState.error,
+          [fieldName]: errMsg,
+        },
+      }),
+      () => {
+        const errors = Object.values(this.state.error).filter((err) => err);
+        console.log("errors >", errors);
+
+        this.setState({
+          isValidForm: errors.length === 0,
+        });
+      }
+    );
+  }
 
   handleSubmit(e) {
     e.preventDefault();
     localStorage.setItem("remember_me", this.state.remember_me);
+    this.setState({
+      isSubmitting: true,
+    });
 
-    //Check login
-    //httpClient is a function which is defined utils sections with the help of axios
+    // Check login
+    // httpClient is a function which is defined utils sections with the help of axios
     httpClient
-      .POST("/auth/login",this.state)
+      .POST("/auth/login", this.state)
       .then((response) => {
-        //console.log(response.data.message)
+        this.setState({
+          isSubmitting: false,
+        });
         notify.showSuccess(response.data.message);
         localStorage.setItem("token", response.data.result.token);
         localStorage.setItem("user", JSON.stringify(response.data.result.user));
         localStorage.setItem("isLoggedIn", true);
-        this.props.history.push('/');
-        
+        this.props.history.push("/");
       })
       .catch((err) => {
-       notify.handleError(err);
+        this.setState({
+          isSubmitting: false,
+        });
+        notify.handleError(err);
       })
       .finally(() => {
         //
       });
-    // this.setState({
-    //     isSubmitting:true
-    // })
-
   }
   render() {
+    let btn = this.state.isSubmitting 
+    ? (<button disabled className="btn btn-primary btn-round btn-block">LOGGING IN... </button>) 
+    : (<button type="submit" className="btn btn-primary btn-round btn-block">LOGIN</button>);
     return (
       <>
         <div className="pattern">
@@ -83,6 +146,7 @@ export default class Login extends Component {
                 <form
                   className="form-auth-small m-t-20"
                   onSubmit={this.handleSubmit.bind(this)}
+                  noValidate
                 >
                   <div className="form-group">
                     <label
@@ -97,10 +161,10 @@ export default class Login extends Component {
                       id="email"
                       name="email"
                       placeholder="user@domain.com"
-                      
                       onChange={this.handleChange}
+                      required
                     />
-                    <label></label>
+                    <p className="error">{this.state.error.email}</p>
                   </div>
                   <div className="form-group">
                     <label
@@ -117,6 +181,7 @@ export default class Login extends Component {
                       placeholder="Password"
                       onChange={this.handleChange}
                     />
+                     <p className="error">{this.state.error.password}</p>
                   </div>
                   <div className="form-group clearfix">
                     <label className="fancy-checkbox element-left">
@@ -128,13 +193,13 @@ export default class Login extends Component {
                       <span>Remember me</span>
                     </label>
                   </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-round btn-block"
-                  >
-                    LOGIN
-                  </button>
 
+                  <Button
+                    isSubmitting={this.state.isSubmitting}
+                    isDisabled={!this.state.isValidForm}
+                    label="LOGIN"
+                    disabledLabel="LOGGING IN..."
+                  ></Button>
                 </form>
               </div>
             </div>
