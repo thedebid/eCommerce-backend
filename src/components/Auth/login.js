@@ -38,6 +38,7 @@ export default class Login extends Component {
     // console.log('name is ', name);
     // console.log('value is', value);
     // console.log('checked is', checked);
+
     if (type === "checked") {
       value = checked;
     }
@@ -49,7 +50,7 @@ export default class Login extends Component {
         }
     }),()=>{
       this.validateForm(name);
-
+     
     })
   };
 
@@ -104,7 +105,7 @@ export default class Login extends Component {
     // Check login
     // httpClient is a function which is defined utils sections with the help of axios
     httpClient
-      .POST("/auth/login", this.state)
+      .POST("/auth/login", this.state.data)
       .then((response) => {
         this.setState({
           isSubmitting: false,
