@@ -136,7 +136,7 @@ class Menu extends Component {
                     id="dropdown-basic"
                     className="user-name left_dropdown_btn"
                   >
-                    <strong>{getUser().email}</strong>
+                    <strong>{getUser()?.email}</strong>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

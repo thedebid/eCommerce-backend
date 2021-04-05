@@ -1,34 +1,42 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import httpClient from "./../../utils/httpClient";
 import notify from "./../../utils/notify";
-const AddUser = () => {
+
+const AddUser = (props) => {
+  //Hook for managing form state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
 
-  const password = useRef({});
-  password.current = watch("password", "");
-
+  //It trigger when submit button clicked
   const onAddUser = (data) => {
-    console.log(data);
+    //Setting form submitting is true
+    setIsSubmitting(true);
+
+    //Making post request to server using axios
     httpClient
       .POST("/auth/register", data)
       .then((response) => {
-        console.log(response);
-        //console.log(response.data.message)
+        //If result got success change route
+        props.history.push("/view-users");
+
+        //Show success popup
         notify.showSuccess(response.data.message);
-        // localStorage.setItem("token", response.data.result.token);
-        // localStorage.setItem("user", JSON.stringify(response.data.result.user));
-        // localStorage.setItem("isLoggedIn", true);
-        this.props.history.push("/view-users");
       })
       .catch((err) => {
+        //If result got failure
+
+        //Show error message
         notify.handleError(err);
+
+        //Setting form submitting is false
+        setIsSubmitting(false);
       })
       .finally(() => {
         //
@@ -39,6 +47,20 @@ const AddUser = () => {
   let errorStyle = {
     border: "1px solid rgb(191, 22, 80)",
   };
+  //Button for conditional rendering based on form state
+  let btn = isSubmitting ? (
+    <button disabled className="btn btn-primary mr-1">
+      Submitting...{" "}
+    </button>
+  ) : (
+    <button
+      type="submit"
+      className="btn btn-primary mr-1"
+      onClick={handleSubmit(onAddUser)}
+    >
+      Submit
+    </button>
+  );
 
   return (
     <>
@@ -117,37 +139,7 @@ const AddUser = () => {
                       <span className="error">{errors.password.message}</span>
                     </div>
                   )}
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">#</span>
-                    </div>
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Confirm Password"
-                      aria-label="Confirm Password"
-                      aria-describedby="basic-addon1"
-                      {...register("password_repeat", {
-                        validate: (value) =>
-                          value === password.current ||
-                          "The passwords do not match",
-                      })}
-                      style={errors.password_repeat ? errorStyle : {}}
-                    />
-                  </div>
-                  {errors.password_repeat && (
-                    <div className="mb-3">
-                      <span className="error">
-                        {errors.password_repeat.message}
-                      </span>
-                    </div>
-                  )}
-                  <input
-                    type="submit"
-                    onClick={handleSubmit(onAddUser)}
-                    className="btn btn-primary mr-1"
-                    value="Login"
-                  ></input>
+                  {btn}
                 </form>
               </div>
             </div>
