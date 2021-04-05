@@ -13,3 +13,9 @@
 @import "assets/vendor/nestable/jquery-nestable.css"; */
 @import "assets/css/site.min.css";
 @import "assets/css/custom.css";
+
+.error {
+  color: #c13f51;
+  font-size: 14px;
+  margin: 5px;
+}

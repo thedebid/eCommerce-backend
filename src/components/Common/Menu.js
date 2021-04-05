@@ -19,6 +19,7 @@ class Menu extends Component {
     this.minisidebarMouseOver = this.minisidebarMouseOver.bind(this);
     this.minisidebarMouseOut = this.minisidebarMouseOut.bind(this);
   }
+
   toggleSubMenu1(e) {
     console.log(e, "eeeee");
     // let menucClass = ''
@@ -85,6 +86,13 @@ class Menu extends Component {
         .getElementById("left-sidebar")
         .addEventListener("mouseout", this.minisidebarMouseOut);
     }
+
+    const getUser = () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      return user;
+    };
+
     return (
       <>
         <div
@@ -128,7 +136,7 @@ class Menu extends Component {
                     id="dropdown-basic"
                     className="user-name left_dropdown_btn"
                   >
-                    <strong>Louis Pierce</strong>
+                    <strong>{getUser().email}</strong>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>

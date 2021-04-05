@@ -76,14 +76,15 @@ import Dashboard from "./Dashboard/dash";
 // import ListGroup from './Components/ListGroup';
 // import MediaObject from './Components/MediaObject';
 // import Nestable from './Components/Nestable';
-import ViewUers from "./Users/viewUsers";
+import viewUers from "./Users/viewUsers";
+import addUser from "./Users/addUsers";
 const Routes = [
   {
     path: "/view-users",
     name: "View Users",
     exact: true,
     pageTitle: "View Users",
-    component: ViewUers,
+    component: viewUers,
   },
   {
     path: "/",
@@ -91,6 +92,13 @@ const Routes = [
     exact: true,
     pageTitle: "Dashboard",
     component: Dashboard,
+  },
+  {
+    path: "/add-user",
+    name: "Add User",
+    exact: true,
+    pageTitle: "Add User",
+    component: addUser,
   },
   //   {
   //     path: "/ui-list-groups",
