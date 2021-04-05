@@ -116,23 +116,14 @@ export default class Login extends Component {
         this.props.history.push("/");
       })
       .catch((err) => {
-<<<<<<< HEAD:src/components/Auth/login.js
-=======
         this.setState({
           isSubmitting: false,
         });
->>>>>>> origin/dev1:src/components/Auth/Login.js
         notify.handleError(err);
       })
       .finally(() => {
         //
       });
-<<<<<<< HEAD:src/components/Auth/login.js
-    // this.setState({
-    //     isSubmitting:true
-    // })
-=======
->>>>>>> origin/dev1:src/components/Auth/Login.js
   }
   render() {
     let btn = this.state.isSubmitting 
@@ -202,14 +193,6 @@ export default class Login extends Component {
                       <span>Remember me</span>
                     </label>
                   </div>
-<<<<<<< HEAD:src/components/Auth/login.js
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-round btn-block"
-                  >
-                    LOGIN
-                  </button>
-=======
 
                   <Button
                     isSubmitting={this.state.isSubmitting}
@@ -217,7 +200,6 @@ export default class Login extends Component {
                     label="LOGIN"
                     disabledLabel="LOGGING IN..."
                   ></Button>
->>>>>>> origin/dev1:src/components/Auth/Login.js
                 </form>
               </div>
             </div>
